@@ -1,0 +1,46 @@
+$nav-color: rgb(25, 75, 120);
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
+$base-font: "Inconsolata";
+
+
+nav {
+  background-color: $nav-color;
+  height: 7vh;
+}
+
+.navbar-brand {
+  font-family: $base-font, monospace;
+  font-size: 2rem;
+}
+
+.canvas-wrapper {
+  width: 100%;
+  height: 70vh;
+  padding: 0;
+}
+
+.main-content {
+  margin-top: 3vh;
+  height: 80vh;
+}
+
+.control-card {
+  margin-top: 1rem;
+  width: 70%;
+}
+
+.fixed-bottom {
+  background-color: $nav-color;
+  height: 5rem;
+}
+
+.modal-button {
+  margin-top: 2rem;
+}
+
+.slider {
+  display: block;
+  width: 70%;
+  height: 2rem;
+  margin-top: 1rem;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name=”description” content="Do you want to try Conway's Game of Life? Visit this page now!"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Ellie Nguyen">
+    <!--<meta property="og:site_name" content="Dank New Rand Memes Generator"/>-->
+    <!--<meta property="og:image" content="https://scontent-atl3-1.xx.fbcdn.net/v/t31.0-8/15723661_1534358443246349_5451002159342390585_o.jpg?oh=ee7ef197bf0e79ca2261afdee681d6a1&oe=596464F1">-->
+    <!--<meta property="og:description" content="Do you want to find out the latest Dank New Rand Meme. Visit this page now!"/>-->
+    <!--<meta property="og:image" content="https://github.com/ellienguyen/rand-meme-generator/blob/master/photos/background.jpg">-->
+    <!--<meta property="og:url" content="http://ellienguyen.me/rand-meme-generator/">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+    <title>Conway's Game of Life</title>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <a class="navbar-brand" href="http://web.stanford.edu/~cdebs/GameOfLife/">
+        Conway's Game of Life
+    </a>
+</nav>
+<div class="container">
+    <div class="row main-content">
+        <div class="col-md-8">
+            <div class="canvas-wrapper">
+                <canvas width="100" height="100" id = "respondCanvas">
+
+                </canvas>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group-vertical" role="group" aria-label="Control button group">
+                <button type="button" class="btn btn-primary" id = "play">
+                    <i class="fa fa-play" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-danger" id = "pause">
+                    <i class="fa fa-pause" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-success" id = "step-forward">
+                    <i class="fa fa-step-forward" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-warning" id = "refresh">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                </button>
+                <!--<button type="button" class="btn btn-secondary" id = "add-new">-->
+                    <!--Add New-->
+                <!--</button>-->
+            </div>
+            <div class="slider">
+                <label for ="speed"><i class="fa fa-tachometer" aria-hidden="true"></i></label>
+                <input id="speed" type="range" min="10" max="100" step="10"/>
+            </div>
+            <div class="card control-card">
+                <div class="card-header">
+                    Pattern
+                </div>
+                <div class="card-block">
+                    <div class="form-group pattern-div">
+                        <!--<label for="pattern-select"><h5>Pattern</h5></label>-->
+                        <select class="form-control" id="pattern-select">
+                            <option>None</option>
+                            <option value = "glider">Glider</option>
+                            <option value = "spaceship">Lightweight Spaceship</option>
+                            <option value = "gun">Gosper Glider Gun</option>
+                            <option value = "pulsar">Pulsar</option>
+                            <option value = "row">10 Cell Row</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-header">
+                    Running information
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" id = "generation">Generation: 0</li>
+                    <li class="list-group-item" id = "live-cells">Live cells: 0</li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-primary modal-button" data-toggle="modal" data-target="#more">
+                More information
+            </button>
+            <div class="modal fade" id="more" tabindex="-1" role="dialog" aria-labelledby="moreModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row more-info-div">
+                                <div class="col-md-10 offset-md-1">
+                                    <h4>The Rules</h4>
+                                    <h5>For a space that is 'populated'</h5>
+                                    <ul>
+                                        <li>Each cell with one or no neighbors dies, as if by solitude.</li>
+                                        <li>Each cell with four or more neighbors dies, as if by overpopulation.</li>
+                                        <li>Each cell with two or three neighbors survives</li>
+                                    </ul>
+                                    <h5>For a space that is 'empty'</h5>
+                                    <ul>
+                                        <li>Each cell with three neighbors becomes populated.</li>
+                                    </ul>
+                                    <h4>Source code</h4>
+                                    <a href="#">
+                                        <p>Github</p>
+                                    </a>
+                                    <h4>Further information</h4>
+                                    <a href="http://web.stanford.edu/~cdebs/GameOfLife/">
+                                        <p>Stanford University - Game of Life</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="script.js"></script>
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+</html>
