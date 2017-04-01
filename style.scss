@@ -44,3 +44,19 @@ nav {
   height: 2rem;
   margin-top: 1rem;
 }
+
+@media (max-width: 991px) {
+    .navbar-brand {
+      font-size: 1rem;
+    }
+
+    .btn-group {
+      margin-top: 2rem;
+    }
+
+    .card {
+      display: none;
+    }
+
+
+}

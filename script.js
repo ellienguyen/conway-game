@@ -171,10 +171,15 @@ playButton.addEventListener("click", function () {
 });
 
 var pauseButton = document.getElementById("pause");
-pauseButton.addEventListener("click", function () {
+function pause() {
     stop();
     pauseButton.className += " active";
-});
+}
+pauseButton.addEventListener("mousedown", pause);
+pauseButton.addEventListener("touchstart", pause);
+pauseButton.addEventListener("mouseup", pause);
+
+pauseButton.addEventListener("click", pause);
 var refreshButton = document.getElementById("refresh");
 refreshButton.addEventListener("click", clear);
 
@@ -211,6 +216,22 @@ patternType.row = function () {
 
 patternType.pulsar = function () {
     return [[10,32],[10,33],[10,34],[10,38],[10,39],[10,40],[12,30],[12,35],[12,37],[12,42],[13,30],[13,35],[13,37],[13,42],[14,30],[14,35],[14,37],[14,42],[15,32],[15,33],[15,34],[15,38],[15,39],[15,40],[17,32],[17,33],[17,34],[17,38],[17,39],[17,40],[18,30],[18,35],[18,37],[18,42],[19,30],[19,35],[19,37],[19,42],[20,30],[20,35],[20,37],[20,42],[22,32],[22,33],[22,34],[22,38],[22,39],[22,40]];
+};
+
+patternType.random = function () {
+    var result = [];
+    for (var i = 0; i < world.dataWidth; i++) {
+        for (var j = 0; j < world.dataHeight; j++) {
+            if (Math.random() < 0.2) {
+                result.push([i, j]);
+            }
+        }
+    }
+    return result;
+};
+
+patternType.none = function () {
+    return [];
 };
 
 function addNewPattern() {
@@ -291,7 +312,8 @@ function resetBackground(cvWidth, cvHeight, color) {
 }
 
 var myTimeout;
-var fps = 15;
+var myRequest;
+var fps = speedSlider.defaultValue;
 function run() {
     myTimeout = setTimeout(function() {
         myRequest = requestAnimationFrame(run);
@@ -302,6 +324,7 @@ function run() {
 
 function stop() {
     clearTimeout(myTimeout);
+    cancelAnimationFrame(myRequest);
 }
 
 function step() {
@@ -315,6 +338,15 @@ function clear() {
     resetBackground(cvWidth, cvHeight, backgroundColor);
     drawGrid(cvWidth, cvHeight, unit, gridColor);
 };
+
+if (window.innerWidth < 991) {
+    var verticalGroup = document.getElementsByClassName("btn-group-vertical")[0];
+    verticalGroup.className = "btn-group";
+    var card = document.getElementsByClassName("card")[0];
+    var select = document.getElementsByTagName("select")[0];
+    verticalGroup.appendChild(select);
+    select.parentNode.removeChild(select);
+}
 
 
 
