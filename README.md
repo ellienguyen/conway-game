@@ -1,7 +1,7 @@
 # Conway's Game of Life
 ## Introduction
 
-Link: <a href = "ellienguyen.github.io/conway-game">Conway's Game of Life - Ellie Nguyen</a>
+Link: <a href = "ellienguyen.github.io/conway-game">Conway's Game of Life - Ellie Nguyen</a> <br>
 This is a JavaScript implementation of Conway's Game of Life, a 'cellular automaton' invented by Cambridge mathematician John Conway.
 
 ## Feature
